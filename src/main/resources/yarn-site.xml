@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+--><configuration>
+
+<!-- Site specific YARN configuration properties -->
+
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.auxservices.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+    </property>
+	<property>
+      <name>yarn.nodemanager.local-dirs</name>
+      <value>/home/henghedata/yarnlocal</value>
+    </property>
+    <property>
+        <name>yarn.timeline-service.leveldb-timeline-store.path</name>
+        <value>/home/henghedata/yarn/timeline</value>
+    </property>
+
+    <!-- HA -->
+    <property>
+        <name>yarn.resourcemanager.ha.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.cluster-id</name>
+        <value>master</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.ha.rm-ids</name>
+        <value>rm1,rm2</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.hostname.rm1</name>
+        <value>henghe-08</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.hostname.rm2</name>
+        <value>henghe-09</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.webapp.address.rm1</name>
+        <value>henghe-08:8088</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.webapp.address.rm2</name>
+        <value>henghe-09:8088</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.zk-address</name>
+        <value>henghe-56:2181,henghe66:2181,henghe67:2181</value>
+    </property>
+
+    <!--是否开启日志聚合。日志聚合会在应用程序完成后收集每个容器的日志，并将这些日志移动到文件系统中，例如 HDFS-->
+    <property>
+        <name>yarn.log-aggregation-enable</name>
+        <value>true</value>
+    </property>
+    <!--聚合日志保存时间（默认-1为不删除）-->
+    <property>
+        <name>yarn.log-aggregation.retain-seconds</name>
+        <value>86400</value>
+    </property>
+
+    <!--yarn一般允许用户配置每个节点上可用的物理资源，可用指的是将机器上内存减去hdfs的，hbase的等等剩下的可用的内存-->
+    <property>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>62168</value>
+    </property>
+    <!--表示该节点服务器上yarn可以使用的��拟的CPU个数，默认是8，推荐配置与核心个数相同，如果节点CPU的核心个数不足8个，需要调小这个值-->
+    <property>
+        <name>yarn.nodemanager.resource.cpu-vcores</name>
+        <value>12</value>
+    </property>
+    <!-- 分配给单个容器containner可申请的最大内存，默认为8291M-->
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name>
+        <value>62168</value>
+    </property>
+    <!--表示单个容器containner可以申请的最大虚拟核数，默认为4；如果申请资源时，超过这个配置，会抛出 InvalidResourceRequestException-->
+    <property>
+        <name>yarn.scheduler.maximum-allocation-vcores</name>
+        <value>12</value>
+    </property>
+    <!--虚拟内存率,默认是2.1-->
+    <property>
+        <name>yarn.nodemanager.vmem-pmem-ratio</name>
+        <value>4</value>
+    </property>
+    <!--disable vmem check-->
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.pmem-check-enabled</name>
+        <value>false</value>
+    </property>
+
+    <!-- timeline server -->
+    <property>
+        <name>yarn.timeline-service.hostname</name>
+        <value>henghe-05</value>
+    </property>
+
+    <property>
+        <name>yarn.timeline-service.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>yarn.timeline-service.generic-application-history.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.am.max-attempts</name>
+        <value>2</value>
+    </property>
+
+    <!--jobhistory-->
+    <property>
+        <name>yarn.log.server.url</name>
+        <value>http://henghe-08:19888/jobhistory/logs</value>
+    </property>
+    <!-- scheduler -->
+    <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler</value>
+    </property>
+    <property>
+        <name>yarn.acl.enable</name>
+        <value>true</value>
+    </property>
+
+    <!-- RM restart -->
+    <property>
+        <name>yarn.resourcemanager.recovery.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.store.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.max-compeleted-applications</name>
+        <value>100</value>
+    </property>
+    <property>
+        <name>yarn.application.classpath</name>
+        <value>/opt/hadoop/etc/hadoop:/opt/hadoop/share/hadoop/common/lib/*:/opt/hadoop/share/hadoop/common/*:/opt/hadoop/share/hadoop/hdfs:/opt/hadoop/share/hadoop/hdfs/lib/*:/opt/hadoop/share/hadoop/hdfs/*:/opt/hadoop/share/hadoop/mapreduce/lib/*:/opt/hadoop/share/hadoop/mapreduce/*:/opt/hadoop/share/hadoop/yarn:/opt/hadoop/share/hadoop/yarn/lib/*:/opt/hadoop/share/hadoop/yarn/*:/opt/hadoop/contrib/capacity-scheduler/*.jar</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.am.max-attempts</name>
+        <value>4</value>
+    </property>
+
+ <property>
+          <name>yarn.resourcemanager.keytab</name>
+          <value>/opt/keytabs/henghe.keytab</value>
+     </property>
+     <property>
+          <name>yarn.resourcemanager.principal</name>
+          <value>henghe/_HOST@HENGHE.COM</value>
+     </property>
+     <property>
+          <name>yarn.nodemanager.keytab</name>
+          <value>/opt/keytabs/henghe.keytab</value>
+     </property>
+     <property>
+          <name>yarn.nodemanager.principal</name>
+          <value>henghe/_HOST@HENGHE.COM</value>
+     </property>
+     <property>
+          <name>yarn.nodemanager.container-executor.class</name>
+          <value>org.apache.hadoop.yarn.server.nodemanager.LinuxContainerExecutor</value>
+     </property>
+     <property>
+          <name>yarn.nodemanager.linux-container-executor.group</name>
+          <value>hadoop</value>
+     </property>
+     <property>
+          <name>yarn.timeline-service.keytab</name>
+          <value>/opt/keytabs/henghe.keytab</value>
+     </property>
+     <property>
+          <name>yarn.timeline-service.principal</name>
+          <value>henghe/_HOST@HENGHE.COM</value>
+     </property>
+  
+     <property>
+          <name>yarn.timeline-service.http-authentication.type</name>
+          <value>kerberos</value>
+     </property>
+  
+     <property>
+          <name>yarn.timeline-service.http-authentication.kerberos.principal</name>
+          <value>HTTP/_HOST@HENGHE.COM</value>
+     </property>
+  
+     <property>
+          <name>yarn.timeline-service.http-authentication.kerberos.keytab</name>
+          <value>/opt/keytabs/henghe.keytab</value>
+     </property>
+  
+     <property>
+          <name>hadoop.http.filter.initializers</name>
+          <value>org.apache.hadoop.security.AuthenticationFilterInitializer</value>
+     </property>
+  
+     <property>
+          <name>hadoop.http.authentication.type</name>
+          <value>kerberos</value>
+     </property>
+  
+     <property>
+          <name>hadoop.http.authentication.kerberos.principal</name>
+          <value>HTTP/_HOST@HENGHE.COM</value>
+     </property>
+  
+     <property>
+          <name>hadoop.http.authentication.kerberos.keytab</name>
+          <value>/opt/keytabs/henghe.keytab</value>
+     </property>
+  
+     <property>
+          <name>yarn.resourcemanager.webapp.spnego-keytab-file</name>
+          <value>/opt/keytabs/henghe.keytab</value>
+     </property>
+  
+     <property>
+          <name>yarn.resourcemanager.webapp.spnego-principal</name>
+          <value>HTTP/_HOST@HENGHE.COM</value>
+     </property>
+  
+     <property>
+          <name>yarn.web-proxy.principal</name>
+          <value>HTTP/_HOST@HENGHE.COM</value>
+     </property>
+  
+     <property>
+          <name>yarn.web-proxy.keytab</name>
+          <value>/opt/keytabs/henghe.keytab</value>
+     </property>
+  
+     <property>
+          <name>yarn.web-proxy.authentication.type</name>
+          <value>kerberos</value>
+     </property>
+  
+     <property>
+          <name>hadoop.http.authentication.type</name>
+          <value>kerberos</value>
+     </property>
+  
+     <property>
+          <name>hadoop.http.authentication.kerberos.principal</name>
+          <value>HTTP/_HOST@HENGHE.COM</value>
+     </property>
+  
+     <property>
+          <name>hadoop.http.authentication.kerberos.keytab</name>
+          <value>/opt/keytabs/henghe.keytab</value>
+     </property>
+<property>
+        <name>yarn.authorization-provider</name>
+        <value>org.apache.ranger.authorization.yarn.authorizer.RangerYarnAuthorizer</value>
+    </property>
+</configuration>

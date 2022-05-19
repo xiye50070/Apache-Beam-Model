@@ -18,10 +18,11 @@ import java.util.Arrays;
 
 import java.io.IOException;
 import java.util.Arrays;
-
+/**
+ * @author MingZhang Wang
+ */
 public class BeamHdfs {
     public static void main(String[] args) {
-        //dfs.namenode.kerberos.principal
         authKerberos();
         String[] args1 = new String[] {
                 "--hdfsConfiguration=[{\"fs.defaultFS\":\"hdfs://192.168.165.47:8020\",\"dfs.namenode.kerberos.principal\":\"henghe/_HOST@HENGHE.COM\"}]" };
@@ -48,8 +49,6 @@ public class BeamHdfs {
         pipeline.run();
     }
     public static Configuration authKerberos(){
-//        System.setProperty("java.security.krb5.conf","/Users/wangmingzhang/Documents/Work/IDEAProject/ApacheBeamModel/ApacheBeamModel/src/main/resources/krb5.conf");
-//        System.setProperty("HADOOP_CONF_DIR","/Users/wangmingzhang/Documents/Work/IDEAProject/ApacheBeamModel/ApacheBeamModel/src/main/resources");
         Configuration configuration = new Configuration();
         configuration.set("hadoop.security.authentication", "kerberos");
         configuration.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");

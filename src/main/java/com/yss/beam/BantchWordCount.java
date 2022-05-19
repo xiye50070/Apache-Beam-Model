@@ -1,19 +1,20 @@
 package com.yss.beam;
 
 import org.apache.beam.sdk.Pipeline;
+import org.apache.beam.sdk.coders.Coder;
+import org.apache.beam.sdk.coders.StringUtf8Coder;
 import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.*;
-import org.apache.beam.sdk.values.KV;
-import org.apache.beam.sdk.values.PCollection;
-import org.apache.beam.sdk.values.TypeDescriptors;
+import org.apache.beam.sdk.values.*;
 
 import java.io.IOException;
 import java.util.Arrays;
-
+/**
+ * @author MingZhang Wang
+ */
 public class BantchWordCount {
     public static void main(String[] args) {
-
         PipelineOptions options = PipelineOptionsFactory.create();
         Pipeline pipeline = Pipeline.create(options);
 
@@ -22,7 +23,6 @@ public class BantchWordCount {
                 .apply(Create.of("hello world","hello flink", "hello flink spark"))
                 .apply(FlatMapElements.into(TypeDescriptors.strings()).via(line -> Arrays.asList(line.split(" "))))
                 .apply(Count.perElement());
-
         pCollection.apply(ParDo.of(new Println()));
         pipeline.run();
     }
@@ -43,7 +43,5 @@ public class BantchWordCount {
             }
         }
     }
-
 }
-
 

@@ -13,6 +13,9 @@ import org.apache.beam.sdk.values.TypeDescriptors;
 
 import java.util.Arrays;
 
+/**
+ * @author MingZhang Wang
+ */
 public class BeamHdfsModel {
     public static void main(String[] args) {
         String[] args1 = new String[] {

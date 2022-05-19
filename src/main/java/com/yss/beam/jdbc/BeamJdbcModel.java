@@ -12,7 +12,9 @@ import org.apache.beam.sdk.values.TypeDescriptors;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Iterator;
-
+/**
+ * @author MingZhang Wang
+ */
 /**
  * 该案例是使用Apache Beam 读写Mysql的案例
  *

@@ -11,7 +11,9 @@ import org.apache.hive.hcatalog.data.HCatRecord;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * @author MingZhang Wang
+ */
 public class BeamHiveModel {
     public static void main(String[] args) {
         Map<String, String> configProperties = new HashMap<>();

@@ -16,7 +16,9 @@ import org.apache.kafka.common.serialization.StringDeserializer;
  * bin/kafka-console-producer.sh --broker-list 192.168.165.20:9092 --topic DevelopTest
  * bin/kafka-topics.sh --create --replication-factor 1 --partitions 1 --topic DevelopTest --zookeeper localhost:2181/kafka
  */
-
+/**
+ * @author MingZhang Wang
+ */
 public class MicroBantchWordCount {
     public static void main(String[] args) {
         PipelineOptions options = PipelineOptionsFactory.create();
